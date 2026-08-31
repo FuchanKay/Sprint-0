@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -19,6 +20,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         base.Initialize();
+        Console.WriteLine("Game Initialized");
     }
 
     protected override void LoadContent()
