@@ -4,11 +4,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
 
-namespace Sprint_0_Game;
+namespace Scripts;
 
 public class Game1 : Core
 {
-    public Game1() : base("Sprint-0-Game", 1280, 720, false)
+
+    private Texture2D _tetrisClub;
+
+    private static readonly int ScreenWidth = 1280;
+    private static readonly int ScreenHeight = 720;
+    private static readonly bool IsFullScreen = false;
+    private static readonly string WindowTitle = "Sprint-0-Game";
+    public Game1() : base(WindowTitle, ScreenWidth, ScreenHeight, IsFullScreen)
     {
         
     }
@@ -20,6 +27,7 @@ public class Game1 : Core
 
     protected override void LoadContent()
     {
+        _tetrisClub = Content.Load<Texture2D>("Images/tetris_logo");
         base.LoadContent();
     }
 
@@ -32,7 +40,29 @@ public class Game1 : Core
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.White);
+
+        // Begin the sprite batch to prepare for rendering.
+        SpriteBatch.Begin();
+
+        // Draw the logo texture
+        // SpriteBatch.Draw(_tetrisClub, Vector2.Zero, Color.White);
+        SpriteBatch.Draw(
+            _tetrisClub,
+            Vector2.Zero,
+            null,
+            Color.White,
+            0f,
+            Vector2.Zero,  
+            0.25f,
+            SpriteEffects.None,
+            0.0f
+        );
+
+        // Always end the sprite batch when finished.
+        SpriteBatch.End();
+
+
         base.Draw(gameTime);
     }
 }

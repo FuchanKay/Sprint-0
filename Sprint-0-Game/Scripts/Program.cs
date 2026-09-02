@@ -1,2 +1,2 @@
-﻿using var game = new Sprint_0_Game.Game1();
+﻿using var game = new Scripts.Game1();
 game.Run();
