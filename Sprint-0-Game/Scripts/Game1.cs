@@ -1,20 +1,20 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
+using Scripts.Player;
 
 namespace Scripts;
 
 public class Game1 : Core
 {
-
-    private Texture2D _tetrisClub;
-
+    private IPlayer Player;
+    private Texture2D ChickTexture;
     private static readonly int ScreenWidth = 1280;
     private static readonly int ScreenHeight = 720;
     private static readonly bool IsFullScreen = false;
     private static readonly string WindowTitle = "Sprint-0-Game";
+
     public Game1() : base(WindowTitle, ScreenWidth, ScreenHeight, IsFullScreen)
     {
         
@@ -22,12 +22,14 @@ public class Game1 : Core
 
     protected override void Initialize()
     {
+        Player = new ChickPlayer();
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        _tetrisClub = Content.Load<Texture2D>("Images/tetris_logo");
+        ChickTexture = Content.Load<Texture2D>("Images/chick");
+        (Player as ChickPlayer).Texture = ChickTexture;
         base.LoadContent();
     }
 
@@ -35,6 +37,7 @@ public class Game1 : Core
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
+        Player.Update(gameTime);
         base.Update(gameTime);
     }
 
@@ -46,18 +49,7 @@ public class Game1 : Core
         SpriteBatch.Begin();
 
         // Draw the logo texture
-        // SpriteBatch.Draw(_tetrisClub, Vector2.Zero, Color.White);
-        SpriteBatch.Draw(
-            _tetrisClub,
-            Vector2.Zero,
-            null,
-            Color.White,
-            0f,
-            Vector2.Zero,  
-            0.25f,
-            SpriteEffects.None,
-            0.0f
-        );
+        Player.Draw(SpriteBatch);
 
         // Always end the sprite batch when finished.
         SpriteBatch.End();
