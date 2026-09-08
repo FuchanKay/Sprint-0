@@ -2,14 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary;
-using Scripts.Player;
+using Scripts.GameComponents;
 
 namespace Scripts;
 
 public class Game1 : Core
 {
-    private IPlayer Player;
-    private Texture2D ChickTexture;
+    private Controller Controller;
     private static readonly int ScreenWidth = 1280;
     private static readonly int ScreenHeight = 720;
     private static readonly bool IsFullScreen = false;
@@ -22,14 +21,15 @@ public class Game1 : Core
 
     protected override void Initialize()
     {
-        Player = new ChickPlayer();
+        Controller = new Controller();
+        Controller.Init();
+
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        ChickTexture = Content.Load<Texture2D>("Images/chick");
-        (Player as ChickPlayer).Texture = ChickTexture;
+        BindAllTextures();
         base.LoadContent();
     }
 
@@ -37,7 +37,8 @@ public class Game1 : Core
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-        Player.Update(gameTime);
+
+        Controller.Update(gameTime.ElapsedGameTime.Milliseconds);
         base.Update(gameTime);
     }
 
@@ -45,16 +46,15 @@ public class Game1 : Core
     {
         GraphicsDevice.Clear(Color.White);
 
-        // Begin the sprite batch to prepare for rendering.
         SpriteBatch.Begin();
-
-        // Draw the logo texture
-        Player.Draw(SpriteBatch);
-
-        // Always end the sprite batch when finished.
+        Controller.Draw(SpriteBatch);
         SpriteBatch.End();
 
-
         base.Draw(gameTime);
+    }
+
+    private void BindAllTextures()
+    {
+        ChickPlayer.Texture = Content.Load<Texture2D>("Images/chick");
     }
 }

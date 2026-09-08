@@ -4,15 +4,14 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Scripts.Enums;
-using Scripts.Player;
 
-namespace Scripts.Player;
+namespace Scripts.GameComponents;
 
 public class ChickPlayer : IPlayer
 {
     private readonly int TextureWidth = 128;
     private readonly int TextureSwapRate = 250;
-    public Texture2D Texture { get; set;}
+    public static Texture2D Texture { get; set; }
     private Rectangle TextureRect;
     private int AnimationMs;
     private Direction Direction;
@@ -24,14 +23,14 @@ public class ChickPlayer : IPlayer
         TextureRect = new Rectangle(0, 0, TextureWidth, TextureWidth);
         Direction = Direction.East;
     }
-    public void Update(GameTime dt)
+    public void Update(int dt)
     {
-        AnimationMs += dt.ElapsedGameTime.Milliseconds;
+        AnimationMs += dt;
+        UpdateTextureRect();
     }
 
     public void Draw(SpriteBatch sb)
     {
-        UpdateTextureRect();
         sb.Draw(
             Texture,
             Vector2.Zero,
@@ -49,12 +48,15 @@ public class ChickPlayer : IPlayer
     {
         var animationToggle = AnimationMs % (TextureSwapRate * 2) > TextureSwapRate;
         var textureXOffset = GetTextureOffset(animationToggle);
+
         TextureRect = new Rectangle(textureXOffset, 0, TextureWidth, TextureWidth);
     }
 
     private int GetTextureOffset(bool animationToggle)
     {
-        var animationOffset = animationToggle ? 1 : 0;
-        return TextureWidth * ((int) Direction * 2 + animationOffset);
+        var animationOffset = animationToggle ? TextureWidth : 0;
+        var directionOffset = (int) Direction * 2 * TextureWidth;
+
+        return directionOffset + animationOffset;
     }
 }

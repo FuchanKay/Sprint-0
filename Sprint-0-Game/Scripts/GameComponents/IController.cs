@@ -1,11 +1,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Scripts.Player;
+namespace Scripts.GameComponents;
 
-public interface IPlayer
+public interface IController
 {
-    void Update(GameTime dt);
+    void Init();
+
+    void Update(int dt);
 
     void Draw(SpriteBatch sb);
+
 }
