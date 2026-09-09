@@ -1,3 +1,4 @@
+using System.Xml;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,6 +17,6 @@ public class Controller : IController
     }
     public void Draw(SpriteBatch sb)
     {
-        
+        Player.Draw(sb);
     }
 }

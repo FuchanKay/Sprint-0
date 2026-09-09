@@ -21,7 +21,7 @@ public class ChickPlayer : IPlayer
         AnimationMs = 0;
         Coord = new Vector2(0, 0);
         TextureRect = new Rectangle(0, 0, TextureWidth, TextureWidth);
-        Direction = Direction.East;
+        Direction = Direction.West;
     }
     public void Update(int dt)
     {
@@ -37,7 +37,7 @@ public class ChickPlayer : IPlayer
             TextureRect,
             Color.White,
             0f,
-            Coord,  
+            Coord,
             1.0f,
             SpriteEffects.None,
             0.0f
@@ -55,7 +55,7 @@ public class ChickPlayer : IPlayer
     private int GetTextureOffset(bool animationToggle)
     {
         var animationOffset = animationToggle ? TextureWidth : 0;
-        var directionOffset = (int) Direction * 2 * TextureWidth;
+        var directionOffset = (int) Direction * TextureWidth * 2;
 
         return directionOffset + animationOffset;
     }
