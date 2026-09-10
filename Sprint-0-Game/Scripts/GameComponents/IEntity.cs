@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Scripts.GameComponents;
 
-public interface IPlayer
+public interface IEntity
 {
     void Update(IContext context, int dt);
 

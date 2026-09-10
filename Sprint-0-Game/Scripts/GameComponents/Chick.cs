@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Scripts.GameComponents;
 
-public class Chick : IPlayer
+public class Chick : IEntity
 {
     private static readonly int TextureWidth = 128;
     private static readonly int TextureHeight = 140;

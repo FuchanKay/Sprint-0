@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Scripts.GameComponents;
 
-public class Apple
+public class Apple : IEntity
 {
     private static readonly int TextureWidth = 64;
     private static readonly Vector2 TextureCenter = new Vector2(TextureWidth / 2, TextureWidth / 2);
@@ -19,6 +19,11 @@ public class Apple
         Scale = RandomizeScale(r);
         TextureRect = new Rectangle(0, 0, TextureWidth, TextureWidth);
 
+    }
+
+    public void Update(IContext c, int dt)
+    {
+        return;
     }
 
     public void Draw(SpriteBatch sb)
