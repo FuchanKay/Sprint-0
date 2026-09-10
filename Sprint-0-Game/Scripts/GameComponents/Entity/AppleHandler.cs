@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Scripts.GameComponents;
+namespace Scripts.GameComponents.Entity;
 
 public class AppleHandler
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Scripts.GameComponents.Entity;
 using Scripts.GameComponents.Input;
 
 namespace Scripts.GameComponents;
@@ -31,8 +32,8 @@ public class Controller : IController
 
         CursorApple = new Apple(MouseInput.X(), MouseInput.Y(), Random);
 
-        MapKeyboardKeyBinds();
-        MapMouseKeyBinds();
+        MapDefaultKeyboardKeyBinds();
+        MapDefaultMouseKeyBinds();
     }
 
     public void Update(int dt)
@@ -58,7 +59,7 @@ public class Controller : IController
         CursorApple.Draw(sb);
     }
 
-    private void MapKeyboardKeyBinds()
+    private void MapDefaultKeyboardKeyBinds()
     {
         KeyboardInput.MapInput(Inputs.WalkNorth, (int) Keys.W);
         KeyboardInput.MapInput(Inputs.WalkEast, (int) Keys.D);
@@ -67,7 +68,7 @@ public class Controller : IController
         KeyboardInput.MapInput(Inputs.ExitGame, (int) Keys.Escape);
     }
 
-    private void MapMouseKeyBinds()
+    private void MapDefaultMouseKeyBinds()
     {
         MouseInput.MapInput(Inputs.SpawnApple, (int) MouseButtons.Left);
         MouseInput.MapInput(Inputs.ClearApples, (int) MouseButtons.Right);
@@ -114,5 +115,4 @@ public class Controller : IController
             KeyboardInput.IsHeld(Inputs.WalkWest)
         );
     }
-
 }

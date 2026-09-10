@@ -7,7 +7,7 @@ namespace Scripts.GameComponents;
 public class Apple : IEntity
 {
     private static readonly int TextureWidth = 64;
-    private static readonly Vector2 TextureCenter = new Vector2(TextureWidth / 2, TextureWidth / 2);
+    private static readonly Vector2 TextureCenter = new(TextureWidth / 2, TextureWidth / 2);
     public static Texture2D Texture { get; set; }
     private Rectangle TextureRect;
     private readonly float MinimumScale = 0.5f;
