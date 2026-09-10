@@ -75,6 +75,7 @@ public class Chick : IEntity
 
     private static bool IsMoving(bool n, bool e, bool s, bool w)
     {
+        
         return ((n || e || s || w) && (n || !e || s || !w) && (!n || e || !s || w));
     }
 
@@ -160,8 +161,7 @@ public class Chick : IEntity
             animationFrame = 1;
         } 
         var textureXOffset = GetTextureOffset(animationFrame);
-
-        TextureRect = new Rectangle(textureXOffset, 0, TextureWidth, TextureHeight);
+        TextureRect.X = textureXOffset;
     }
 
     private int GetTextureOffset(int animationFrame)

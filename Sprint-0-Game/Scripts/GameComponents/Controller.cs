@@ -19,16 +19,13 @@ public class Controller : IController
     public void Init()
     {
         Random = new();
-        Chick = new Chick();
-        Apples = new AppleHandler();
+        Chick = new();
+        Apples = new();
 
-        Dictionary<Inputs, KeyCondition> InputKeyStateMap = [];
-        Dictionary<Inputs, MouseButtonCondition> InputMouseButtonMap = [];
+        KeyboardInput = new();
+        MouseInput =  new();
 
-        KeyboardInput = new KeyboardInputManager(InputKeyStateMap);
-        MouseInput =  new MouseInputManager(InputMouseButtonMap);
-
-        CursorApple = new Apple(MouseInput.X(), MouseInput.Y(), Random);
+        CursorApple = new(MouseInput.X(), MouseInput.Y(), Random);
 
         MapDefaultKeyboardKeyBinds();
         MapDefaultMouseKeyBinds();

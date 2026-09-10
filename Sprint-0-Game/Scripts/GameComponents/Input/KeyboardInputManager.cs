@@ -3,9 +3,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Scripts.GameComponents;
 
-public class KeyboardInputManager(Dictionary<Inputs, KeyCondition> map) : IInputManager
+public class KeyboardInputManager : IInputManager
 {
-    private readonly Dictionary<Inputs, KeyCondition> InputKeyStateMap = map;
+    private readonly Dictionary<Inputs, KeyCondition> InputKeyStateMap;
+
+    public KeyboardInputManager()
+    {
+        InputKeyStateMap = [];
+    }
+
     public void Update()
     {
         foreach (var inputKeyState in InputKeyStateMap)
@@ -49,5 +55,10 @@ public class KeyboardInputManager(Dictionary<Inputs, KeyCondition> map) : IInput
         {
             InputKeyStateMap[input] = new KeyCondition(keyEnum);
         }
+    }
+
+    public void ClearMapping()
+    {
+        InputKeyStateMap.Clear();
     }
 }

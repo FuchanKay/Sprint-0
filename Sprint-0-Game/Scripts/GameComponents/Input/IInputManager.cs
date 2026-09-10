@@ -5,5 +5,7 @@ public interface IInputManager
     bool IsHeld(Inputs input);
     bool IsPressed(Inputs input);
     bool IsReleased(Inputs input);
+    //type cast the enum to an int
     void MapInput(Inputs input, int button);
+    void ClearMapping();
 }

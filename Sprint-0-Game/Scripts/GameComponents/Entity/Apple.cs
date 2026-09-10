@@ -9,7 +9,7 @@ public class Apple : IEntity
     private static readonly int TextureWidth = 64;
     private static readonly Vector2 TextureCenter = new(TextureWidth / 2, TextureWidth / 2);
     public static Texture2D Texture { get; set; }
-    private Rectangle TextureRect;
+    private readonly Rectangle TextureRect;
     private readonly float MinimumScale = 0.5f;
     private readonly float Scale;
     public Vector2 Coord { get; set; }
@@ -18,7 +18,6 @@ public class Apple : IEntity
         Coord = new(x, y);
         Scale = RandomizeScale(r);
         TextureRect = new Rectangle(0, 0, TextureWidth, TextureWidth);
-
     }
 
     public void Update(IContext c, int dt)
