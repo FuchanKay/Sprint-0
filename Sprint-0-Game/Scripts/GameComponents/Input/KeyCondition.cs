@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Input;
 
-namespace Scripts.GameComponents.Input;
+namespace Scripts.GameComponents;
 
 public class KeyCondition(Keys key)
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 
-namespace Scripts.GameComponents.Input;
+namespace Scripts.GameComponents;
 
 public class MouseInputManager(Dictionary<Inputs, MouseButtonCondition> map) : IInputManager
 {

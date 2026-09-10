@@ -1,4 +1,4 @@
-namespace Scripts.GameComponents.Input;
+namespace Scripts.GameComponents;
 public enum Inputs
 {
     WalkEast = 0,

@@ -12,6 +12,7 @@ public class Game1 : Core
     private static readonly int ScreenHeight = 720;
     private static readonly bool IsFullScreen = false;
     private static readonly string WindowTitle = "Sprint-0-Game";
+    private static readonly Color BgColor = Color.LawnGreen;
 
     public Game1() : base(WindowTitle, ScreenWidth, ScreenHeight, IsFullScreen)
     {
@@ -47,7 +48,7 @@ public class Game1 : Core
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.LawnGreen);
+        GraphicsDevice.Clear(BgColor);
 
         SpriteBatch.Begin();
         Controller.Draw(SpriteBatch);
