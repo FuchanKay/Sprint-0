@@ -24,6 +24,8 @@ public class Game1 : Core
         Controller = new Controller();
         Controller.Init();
 
+        Chick.SetPlayerBoundaries(ScreenWidth, ScreenHeight);
+
         base.Initialize();
     }
 
@@ -35,9 +37,11 @@ public class Game1 : Core
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
         Controller.Update(gameTime.ElapsedGameTime.Milliseconds);
+        if (Controller.ShouldExit)
+        {
+            Exit();
+        }
         base.Update(gameTime);
     }
 
@@ -54,6 +58,6 @@ public class Game1 : Core
 
     private void BindAllTextures()
     {
-        ChickPlayer.Texture = Content.Load<Texture2D>("Images/chick");
+        Chick.Texture = Content.Load<Texture2D>("Images/chick");
     }
 }
