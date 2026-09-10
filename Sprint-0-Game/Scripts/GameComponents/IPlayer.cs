@@ -4,7 +4,7 @@ namespace Scripts.GameComponents;
 
 public interface IPlayer
 {
-    void Update(int dt);
+    void Update(IContext context, int dt);
 
     void Draw(SpriteBatch sb);
 }

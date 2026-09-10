@@ -6,5 +6,6 @@ public enum Inputs
     WalkNorth = 2,
     WalkSouth = 3,
     ExitGame = 4,
-    SpawnApple = 5
+    SpawnApple = 5,
+    ClearApples = 6,
 }

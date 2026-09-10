@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Scripts.GameComponents.Input;
 
-public class MouseInputManager(Dictionary<Inputs, ButtonCondition> map) : IInputManager
+public class MouseInputManager(Dictionary<Inputs, MouseButtonCondition> map) : IInputManager
 {
-    private readonly Dictionary<Inputs, ButtonCondition> InputButtonStateMap = map;
+    private readonly Dictionary<Inputs, MouseButtonCondition> InputButtonStateMap = map;
 
     public void Update()
     {
@@ -71,9 +71,9 @@ public class MouseInputManager(Dictionary<Inputs, ButtonCondition> map) : IInput
     public void MapInput(Inputs input, int button)
     {
         var buttonEnum = (MouseButtons) button;
-        if (!InputButtonStateMap.TryAdd(input, new ButtonCondition(buttonEnum)))
+        if (!InputButtonStateMap.TryAdd(input, new MouseButtonCondition(buttonEnum)))
         {
-            InputButtonStateMap[input] = new ButtonCondition(buttonEnum);
+            InputButtonStateMap[input] = new MouseButtonCondition(buttonEnum);
         }
     }
 }

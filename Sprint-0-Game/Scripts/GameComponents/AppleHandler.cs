@@ -25,4 +25,9 @@ public class AppleHandler
         }
     }
 
+    public void ClearApples()
+    {
+        Apples.Clear();
+    }
+
 }

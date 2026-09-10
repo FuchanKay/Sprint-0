@@ -30,9 +30,10 @@ public class Chick : IPlayer
         Direction = Directions.East;
     }
 
-    public void HandleInputs(bool n, bool e, bool s, bool w)
+    public void Update(IContext c, int dt)
     {
-        Moving = IsMoving(n, e, s, w);
+        var context = c as ChickContext;
+        Moving = IsMoving(context.N, context.E, context.S, context.W);
         if (!Moving)
         {
             return;
@@ -40,24 +41,20 @@ public class Chick : IPlayer
         switch (Direction)
         {
             case Directions.North:
-                HandleMove(w, n, e, s);
+                HandleMove(context.W, context.N, context.E, context.S);
                 break;
             case Directions.East:
-                HandleMove(n, e, s, w);
+                HandleMove(context.N, context.E, context.S, context.W);
                 break;
             case Directions.South:
-                HandleMove(e, s, w, n);
+                HandleMove(context.E, context.S, context.W, context.N);
                 break;
             case Directions.West:
-                HandleMove(s, w, n, e);
+                HandleMove(context.S, context.W, context.N, context.E);
                 break;
             default:
                 break;
         }
-    }
-
-    public void Update(int dt)
-    {
         if (Moving)
         {
             AnimationMs += dt;

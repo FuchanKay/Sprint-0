@@ -14,27 +14,24 @@ public class Controller : IController
     private Chick Chick;
     private KeyboardInputManager KeyboardInput;
     private MouseInputManager MouseInput;
+
     public void Init()
     {
         Chick = new Chick();
         Apples = new AppleHandler();
 
         Dictionary<Inputs, KeyCondition> InputKeyStateMap = [];
-        Dictionary<Inputs, ButtonCondition> InputMouseButtonMap = [];
+        Dictionary<Inputs, MouseButtonCondition> InputMouseButtonMap = [];
 
         KeyboardInput = new KeyboardInputManager(InputKeyStateMap);
         MouseInput =  new MouseInputManager(InputMouseButtonMap);
 
         CursorApple = new Apple(MouseInput.X(), MouseInput.Y());
 
-        KeyboardInput.MapInput(Inputs.WalkNorth, (int) Keys.W);
-        KeyboardInput.MapInput(Inputs.WalkEast, (int) Keys.D);
-        KeyboardInput.MapInput(Inputs.WalkSouth, (int) Keys.S);
-        KeyboardInput.MapInput(Inputs.WalkWest, (int) Keys.A);
-        KeyboardInput.MapInput(Inputs.ExitGame, (int) Keys.Escape);
-
-        MouseInput.MapInput(Inputs.SpawnApple, (int) MouseButtons.Left);
+        MapKeyboardKeyBinds();
+        MapMouseKeyBinds();
     }
+
     public void Update(int dt)
     {
         KeyboardInput.Update();
@@ -60,13 +57,34 @@ public class Controller : IController
             CursorApple = new Apple(MouseInput.X(), MouseInput.Y());
         }
 
-        Chick.HandleInputs(walkN, walkE, walkS, walkW);
-        Chick.Update(dt);
+        var clearApple = MouseInput.IsPressed(Inputs.ClearApples);
+        if (clearApple)
+        {
+            Apples.ClearApples();
+        }
+        var chickContext = new ChickContext(walkN, walkE, walkS, walkW);
+        Chick.Update(chickContext, dt);
     }
+
     public void Draw(SpriteBatch sb)
     {
         Apples.Draw(sb);
         Chick.Draw(sb);
         CursorApple.Draw(sb);
+    }
+
+    private void MapKeyboardKeyBinds()
+    {
+        KeyboardInput.MapInput(Inputs.WalkNorth, (int) Keys.W);
+        KeyboardInput.MapInput(Inputs.WalkEast, (int) Keys.D);
+        KeyboardInput.MapInput(Inputs.WalkSouth, (int) Keys.S);
+        KeyboardInput.MapInput(Inputs.WalkWest, (int) Keys.A);
+        KeyboardInput.MapInput(Inputs.ExitGame, (int) Keys.Escape);
+    }
+
+    private void MapMouseKeyBinds()
+    {
+        MouseInput.MapInput(Inputs.SpawnApple, (int) MouseButtons.Left);
+        MouseInput.MapInput(Inputs.ClearApples, (int) MouseButtons.Right);
     }
 }
