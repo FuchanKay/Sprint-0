@@ -1,7 +1,4 @@
 namespace Scripts.GameComponents.Input;
-
-using Microsoft.Xna.Framework.Input;
-using Scripts.Enums;
 public interface IInputManager
 {
     void Update();

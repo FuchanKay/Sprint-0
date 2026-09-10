@@ -1,4 +1,4 @@
-namespace Scripts.Enums;
+namespace Scripts.GameComponents;
 public enum Directions
 {
     East = 0,

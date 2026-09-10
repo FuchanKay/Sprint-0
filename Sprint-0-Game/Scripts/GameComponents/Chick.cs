@@ -1,7 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Scripts.Enums;
 
 namespace Scripts.GameComponents;
 

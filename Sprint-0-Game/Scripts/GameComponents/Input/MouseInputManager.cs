@@ -1,18 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Microsoft.Xna.Framework.Input;
-using Scripts.Enums;
 
 namespace Scripts.GameComponents.Input;
 
-public class MouseInputManager : IInputManager
+public class MouseInputManager(Dictionary<Inputs, ButtonCondition> map) : IInputManager
 {
-    private Dictionary<Inputs, ButtonCondition> InputButtonStateMap;
-    public MouseInputManager(Dictionary<Inputs, ButtonCondition> map)
-    {
-        InputButtonStateMap = map;
-    }
+    private readonly Dictionary<Inputs, ButtonCondition> InputButtonStateMap = map;
+
     public void Update()
     {
         foreach (var inputButtonState in InputButtonStateMap)
@@ -37,12 +31,12 @@ public class MouseInputManager : IInputManager
             }
         }
     }
-    public int PositionX()
+    public int X()
     {
         return Mouse.GetState().Position.X;
     }
 
-    public int PositionY()
+    public int Y()
     {
         return Mouse.GetState().Position.Y;
     }

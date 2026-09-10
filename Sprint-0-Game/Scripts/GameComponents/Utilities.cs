@@ -1,5 +1,3 @@
-using Scripts.Enums;
-
 namespace Scripts.GameComponents;
 
 public class Utilities
@@ -36,6 +34,6 @@ public class Utilities
             Directions.South => Directions.North,
             Directions.West => Directions.East,
             _ => Directions.East,
-        };   
+        };
     }
 }

@@ -14,22 +14,20 @@ public class Controller : IController
     public void Init()
     {
         Chick = new Chick();
-        Dictionary<Inputs, KeyCondition> InputKeyStateMap = new()
-        {
-            {Inputs.WalkNorth, new KeyCondition(Keys.W)},
-            {Inputs.WalkEast, new KeyCondition(Keys.D)},
-            {Inputs.WalkSouth, new KeyCondition(Keys.S)},
-            {Inputs.WalkWest, new KeyCondition(Keys.A)},
-            {Inputs.ExitGame, new KeyCondition(Keys.Escape)}
-        };
 
-        Dictionary<Inputs, ButtonCondition> InputMouseButtonMap = new()
-        {
-            {Inputs.SpawnApple, new ButtonCondition(MouseButtons.Left)}
-        };
+        Dictionary<Inputs, KeyCondition> InputKeyStateMap = new();
+        Dictionary<Inputs, ButtonCondition> InputMouseButtonMap = new();
 
         KeyboardInput = new KeyboardInputManager(InputKeyStateMap);
         MouseInput =  new MouseInputManager(InputMouseButtonMap);
+
+        KeyboardInput.MapInput(Inputs.WalkNorth, (int) Keys.W);
+        KeyboardInput.MapInput(Inputs.WalkEast, (int) Keys.D);
+        KeyboardInput.MapInput(Inputs.WalkSouth, (int) Keys.S);
+        KeyboardInput.MapInput(Inputs.WalkWest, (int) Keys.A);
+        KeyboardInput.MapInput(Inputs.ExitGame, (int) Keys.Escape);
+
+        MouseInput.MapInput(Inputs.SpawnApple, (int) MouseButtons.Left);
     }
     public void Update(int dt)
     {

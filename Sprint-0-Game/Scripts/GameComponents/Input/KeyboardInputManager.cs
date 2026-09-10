@@ -1,16 +1,11 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using Scripts.Enums;
 
 namespace Scripts.GameComponents.Input;
 
-public class KeyboardInputManager : IInputManager
+public class KeyboardInputManager(Dictionary<Inputs, KeyCondition> map) : IInputManager
 {
-    private readonly Dictionary<Inputs, KeyCondition> InputKeyStateMap;
-    public KeyboardInputManager(Dictionary<Inputs, KeyCondition> map)
-    {
-        InputKeyStateMap = map;
-    }
+    private readonly Dictionary<Inputs, KeyCondition> InputKeyStateMap = map;
     public void Update()
     {
         foreach (var inputKeyState in InputKeyStateMap)
