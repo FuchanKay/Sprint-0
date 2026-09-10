@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,9 +15,11 @@ public class Controller : IController
     private Chick Chick;
     private KeyboardInputManager KeyboardInput;
     private MouseInputManager MouseInput;
+    private Random Random;
 
     public void Init()
     {
+        Random = new();
         Chick = new Chick();
         Apples = new AppleHandler();
 
@@ -26,7 +29,7 @@ public class Controller : IController
         KeyboardInput = new KeyboardInputManager(InputKeyStateMap);
         MouseInput =  new MouseInputManager(InputMouseButtonMap);
 
-        CursorApple = new Apple(MouseInput.X(), MouseInput.Y());
+        CursorApple = new Apple(MouseInput.X(), MouseInput.Y(), Random);
 
         MapKeyboardKeyBinds();
         MapMouseKeyBinds();
@@ -36,33 +39,15 @@ public class Controller : IController
     {
         KeyboardInput.Update();
         MouseInput.Update();
-        
-        var exitGame = KeyboardInput.IsHeld(Inputs.ExitGame);
-        ShouldExit = exitGame;
 
-        var walkN = KeyboardInput.IsHeld(Inputs.WalkNorth);
-        var walkE = KeyboardInput.IsHeld(Inputs.WalkEast);
-        var walkS = KeyboardInput.IsHeld(Inputs.WalkSouth);
-        var walkW = KeyboardInput.IsHeld(Inputs.WalkWest);
+        CheckExitGame();
 
-        CursorApple.Coord = new Vector2(MouseInput.X(), MouseInput.Y());
+        UpdateAppleCursor();
 
-        var spawnApple = MouseInput.IsPressed(Inputs.SpawnApple);
-        if (spawnApple)
-        {
-            var x = MouseInput.X();
-            var y = MouseInput.Y();
-            var apple = CursorApple;
-            Apples.AddApple(apple);
-            CursorApple = new Apple(MouseInput.X(), MouseInput.Y());
-        }
+        CheckSpawnApple();
+        CheckClearApple();
 
-        var clearApple = MouseInput.IsPressed(Inputs.ClearApples);
-        if (clearApple)
-        {
-            Apples.ClearApples();
-        }
-        var chickContext = new ChickContext(walkN, walkE, walkS, walkW);
+        var chickContext = CreateChickContext();
         Chick.Update(chickContext, dt);
     }
 
@@ -87,4 +72,47 @@ public class Controller : IController
         MouseInput.MapInput(Inputs.SpawnApple, (int) MouseButtons.Left);
         MouseInput.MapInput(Inputs.ClearApples, (int) MouseButtons.Right);
     }
+
+    private void CheckExitGame()
+    {
+        var exitGame = KeyboardInput.IsHeld(Inputs.ExitGame);
+        ShouldExit = exitGame;
+    }
+
+    private void CheckSpawnApple()
+    {
+        var spawnApple = MouseInput.IsPressed(Inputs.SpawnApple);
+        if (spawnApple)
+        {
+            var x = MouseInput.X();
+            var y = MouseInput.Y();
+            Apples.AddApple(CursorApple);
+            CursorApple = new Apple(MouseInput.X(), MouseInput.Y(), Random);
+        }
+    }
+
+    private void CheckClearApple()
+    {
+        var clearApple = MouseInput.IsPressed(Inputs.ClearApples);
+        if (clearApple)
+        {
+            Apples.ClearApples();
+        }
+    }
+
+    private void UpdateAppleCursor()
+    {
+        CursorApple.Coord = new Vector2(MouseInput.X(), MouseInput.Y());
+    }
+
+    private ChickContext CreateChickContext()
+    {
+        return new ChickContext(
+            KeyboardInput.IsHeld(Inputs.WalkNorth),
+            KeyboardInput.IsHeld(Inputs.WalkEast),
+            KeyboardInput.IsHeld(Inputs.WalkSouth),
+            KeyboardInput.IsHeld(Inputs.WalkWest)
+        );
+    }
+
 }

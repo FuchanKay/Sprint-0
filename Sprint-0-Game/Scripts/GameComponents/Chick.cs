@@ -34,23 +34,19 @@ public class Chick : IPlayer
     {
         var context = c as ChickContext;
         Moving = IsMoving(context.N, context.E, context.S, context.W);
-        if (!Moving)
-        {
-            return;
-        }
         switch (Direction)
         {
             case Directions.North:
-                HandleMove(context.W, context.N, context.E, context.S);
+                RotateAndMove(context.W, context.N, context.E, context.S);
                 break;
             case Directions.East:
-                HandleMove(context.N, context.E, context.S, context.W);
+                RotateAndMove(context.N, context.E, context.S, context.W);
                 break;
             case Directions.South:
-                HandleMove(context.E, context.S, context.W, context.N);
+                RotateAndMove(context.E, context.S, context.W, context.N);
                 break;
             case Directions.West:
-                HandleMove(context.S, context.W, context.N, context.E);
+                RotateAndMove(context.S, context.W, context.N, context.E);
                 break;
             default:
                 break;
@@ -82,17 +78,21 @@ public class Chick : IPlayer
         return ((n || e || s || w) && (n || !e || s || !w) && (!n || e || !s || w));
     }
 
-    private void HandleMove(bool left, bool front, bool right, bool back)
+    private void RotateAndMove(bool left, bool front, bool right, bool back)
     {
+        if (!Moving)
+        {
+            return;
+        }
         var couldRotate = !front && (left || back || right);
         if (couldRotate)
         {
-            HandleRotation(left, back, right);
+            Rotate(left, back, right);
         }
         Move(left, back, right);
     }
 
-    private void HandleRotation(bool left, bool back, bool right)
+    private void Rotate(bool left, bool back, bool right)
     {
         if (left && !back && !right)
         {
