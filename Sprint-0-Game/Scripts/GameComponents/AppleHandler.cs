@@ -5,7 +5,7 @@ namespace Scripts.GameComponents;
 
 public class AppleHandler
 {
-    private readonly int AppleLimit = 10;
+    private readonly int AppleLimit = 50;
     private readonly List<Apple> Apples = [];
     
     public void Draw(SpriteBatch sb)

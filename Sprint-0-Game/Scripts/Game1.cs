@@ -20,6 +20,7 @@ public class Game1 : Core
 
     protected override void Initialize()
     {
+        IsMouseVisible = false; 
         Controller = new Controller();
         Controller.Init();
 

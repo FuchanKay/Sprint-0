@@ -11,7 +11,7 @@ public class Apple
     public static Texture2D Texture { get; set; }
     private readonly float MinimumScale = 0.5f;
     private readonly float Scale;
-    private Vector2 Coord;
+    public Vector2 Coord { get; set; }
     public Apple(int x, int y)
     {
         var random = new Random();
