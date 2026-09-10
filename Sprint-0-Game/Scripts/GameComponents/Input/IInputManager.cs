@@ -1,4 +1,4 @@
-namespace Scripts.GameComponents;
+namespace Scripts.GameComponents.Input;
 
 using Microsoft.Xna.Framework.Input;
 using Scripts.Enums;

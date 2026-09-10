@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Scripts.Enums;
+using Scripts.GameComponents.Input;
 
 namespace Scripts.GameComponents;
 
@@ -15,18 +14,18 @@ public class Controller : IController
     public void Init()
     {
         Chick = new Chick();
-        Dictionary<Inputs, KeyState> InputKeyStateMap = new()
+        Dictionary<Inputs, KeyCondition> InputKeyStateMap = new()
         {
-            {Inputs.WalkNorth, new KeyState(Keys.W)},
-            {Inputs.WalkEast, new KeyState(Keys.D)},
-            {Inputs.WalkSouth, new KeyState(Keys.S)},
-            {Inputs.WalkWest, new KeyState(Keys.A)},
-            {Inputs.ExitGame, new KeyState(Keys.Escape)}
+            {Inputs.WalkNorth, new KeyCondition(Keys.W)},
+            {Inputs.WalkEast, new KeyCondition(Keys.D)},
+            {Inputs.WalkSouth, new KeyCondition(Keys.S)},
+            {Inputs.WalkWest, new KeyCondition(Keys.A)},
+            {Inputs.ExitGame, new KeyCondition(Keys.Escape)}
         };
 
-        Dictionary<Inputs, ButtonState> InputMouseButtonMap = new()
+        Dictionary<Inputs, ButtonCondition> InputMouseButtonMap = new()
         {
-            {Inputs.SpawnApple, new ButtonState(MouseButtons.Left)}
+            {Inputs.SpawnApple, new ButtonCondition(MouseButtons.Left)}
         };
 
         KeyboardInput = new KeyboardInputManager(InputKeyStateMap);
@@ -45,8 +44,8 @@ public class Controller : IController
         var walkS = KeyboardInput.IsHeld(Inputs.WalkSouth);
         var walkW = KeyboardInput.IsHeld(Inputs.WalkWest);
 
-        var spawnApple = MouseInput.IsReleased(Inputs.SpawnApple);
-        
+        var spawnApple = MouseInput.IsPressed(Inputs.SpawnApple);
+
         Chick.HandleInputs(walkN, walkE, walkS, walkW);
         Chick.Update(dt);
     }

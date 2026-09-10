@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Scripts.Enums;
 
-namespace Scripts.GameComponents;
+namespace Scripts.GameComponents.Input;
 
 public class KeyboardInputManager : IInputManager
 {
-    private readonly Dictionary<Inputs, KeyState> InputKeyStateMap;
-    public KeyboardInputManager(Dictionary<Inputs, KeyState> map)
+    private readonly Dictionary<Inputs, KeyCondition> InputKeyStateMap;
+    public KeyboardInputManager(Dictionary<Inputs, KeyCondition> map)
     {
         InputKeyStateMap = map;
     }
@@ -22,7 +22,7 @@ public class KeyboardInputManager : IInputManager
     }
     public bool IsHeld(Inputs input)
     {
-        if (InputKeyStateMap.TryGetValue(input, out KeyState keyState))
+        if (InputKeyStateMap.TryGetValue(input, out KeyCondition keyState))
         {
             return keyState.Current;
         }
@@ -31,7 +31,7 @@ public class KeyboardInputManager : IInputManager
 
     public bool IsPressed(Inputs input)
     {
-        if (InputKeyStateMap.TryGetValue(input, out KeyState keyState))
+        if (InputKeyStateMap.TryGetValue(input, out KeyCondition keyState))
         {
             return keyState.Current && !keyState.Previous;
         }
@@ -40,7 +40,7 @@ public class KeyboardInputManager : IInputManager
 
     public bool IsReleased(Inputs input)
     {
-        if (InputKeyStateMap.TryGetValue(input, out KeyState keyState))
+        if (InputKeyStateMap.TryGetValue(input, out KeyCondition keyState))
         {
             return !keyState.Current && keyState.Previous;
         }
@@ -50,9 +50,9 @@ public class KeyboardInputManager : IInputManager
     public void MapInput(Inputs input, int key)
     {
         var keyEnum = (Keys) key;
-        if (!InputKeyStateMap.TryAdd(input, new KeyState(keyEnum)))
+        if (!InputKeyStateMap.TryAdd(input, new KeyCondition(keyEnum)))
         {
-            InputKeyStateMap[input] = new KeyState(keyEnum);
+            InputKeyStateMap[input] = new KeyCondition(keyEnum);
         }
     }
 }

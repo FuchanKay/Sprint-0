@@ -1,6 +1,6 @@
 using Scripts.Enums;
 
-namespace Scripts;
+namespace Scripts.GameComponents;
 
 public class Utilities
 {

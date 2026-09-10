@@ -1,3 +1,4 @@
+namespace Scripts.GameComponents.Input;
 public enum MouseButtons
 {
     Left = 0,

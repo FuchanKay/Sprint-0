@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Microsoft.Xna.Framework.Input;
 using Scripts.Enums;
 
-namespace Scripts.GameComponents;
+namespace Scripts.GameComponents.Input;
 
 public class MouseInputManager : IInputManager
 {
-    private Dictionary<Inputs, ButtonState> InputButtonStateMap;
-    public MouseInputManager(Dictionary<Inputs, ButtonState> map)
+    private Dictionary<Inputs, ButtonCondition> InputButtonStateMap;
+    public MouseInputManager(Dictionary<Inputs, ButtonCondition> map)
     {
         InputButtonStateMap = map;
     }
@@ -36,6 +37,16 @@ public class MouseInputManager : IInputManager
             }
         }
     }
+    public int PositionX()
+    {
+        return Mouse.GetState().Position.X;
+    }
+
+    public int PositionY()
+    {
+        return Mouse.GetState().Position.Y;
+    }
+
     public bool IsHeld(Inputs input)
     {
         if (InputButtonStateMap.TryGetValue(input, out var buttonState))
@@ -65,6 +76,10 @@ public class MouseInputManager : IInputManager
 
     public void MapInput(Inputs input, int button)
     {
-        
+        var buttonEnum = (MouseButtons) button;
+        if (!InputButtonStateMap.TryAdd(input, new ButtonCondition(buttonEnum)))
+        {
+            InputButtonStateMap[input] = new ButtonCondition(buttonEnum);
+        }
     }
 }

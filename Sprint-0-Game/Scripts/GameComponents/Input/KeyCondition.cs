@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework.Input;
 
-namespace Scripts.GameComponents;
+namespace Scripts.GameComponents.Input;
 
-public class KeyState(Keys key)
+public class KeyCondition(Keys key)
 {
     public Keys Key { get; } = key;
     public bool Previous { get; set; } = false;
