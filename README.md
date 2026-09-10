@@ -1,2 +1,13 @@
 # Sprint 0
-Example project for CSE3902 assignment
+CSE3902 assignment by Fuma Kondo
+
+# GamePlay
+The riveting gameplay includes being able to control the direction and movement of a chick player character and placing apples of random sizes. 
+The chick can be moved using WASD
+The apples can be placed by left clicking with the mouse
+
+# AI use
+No AI was used to program this project
+
+# Resources
+Monogame documentations

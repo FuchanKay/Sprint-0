@@ -8,15 +8,17 @@ namespace Scripts.GameComponents;
 public class Controller : IController
 {
     public bool ShouldExit { get; set; }
+    private AppleHandler Apples;
     private Chick Chick;
     private KeyboardInputManager KeyboardInput;
     private MouseInputManager MouseInput;
     public void Init()
     {
         Chick = new Chick();
+        Apples = new AppleHandler();
 
-        Dictionary<Inputs, KeyCondition> InputKeyStateMap = new();
-        Dictionary<Inputs, ButtonCondition> InputMouseButtonMap = new();
+        Dictionary<Inputs, KeyCondition> InputKeyStateMap = [];
+        Dictionary<Inputs, ButtonCondition> InputMouseButtonMap = [];
 
         KeyboardInput = new KeyboardInputManager(InputKeyStateMap);
         MouseInput =  new MouseInputManager(InputMouseButtonMap);
@@ -43,12 +45,21 @@ public class Controller : IController
         var walkW = KeyboardInput.IsHeld(Inputs.WalkWest);
 
         var spawnApple = MouseInput.IsPressed(Inputs.SpawnApple);
+        if (spawnApple)
+        {
+            var x = MouseInput.X();
+            var y = MouseInput.Y();
+            var apple = new Apple(x, y);
+            Apples.AddApple(apple);
+
+        }
 
         Chick.HandleInputs(walkN, walkE, walkS, walkW);
         Chick.Update(dt);
     }
     public void Draw(SpriteBatch sb)
     {
+        Apples.Draw(sb);
         Chick.Draw(sb);
     }
 }

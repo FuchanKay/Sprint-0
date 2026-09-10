@@ -58,5 +58,6 @@ public class Game1 : Core
     private void BindAllTextures()
     {
         Chick.Texture = Content.Load<Texture2D>("Images/chick");
+        Apple.Texture = Content.Load<Texture2D>("Images/apple");
     }
 }
