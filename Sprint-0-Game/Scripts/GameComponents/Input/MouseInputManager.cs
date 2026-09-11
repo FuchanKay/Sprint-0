@@ -5,7 +5,7 @@ namespace Scripts.GameComponents;
 
 public class MouseInputManager : IInputManager
 {
-    private readonly Dictionary<Inputs, MouseButtonCondition> InputButtonStateMap;
+    private readonly Dictionary<Inputs, MouseButtonStatus> InputButtonStateMap;
     public MouseInputManager()
     {
         InputButtonStateMap = [];
@@ -15,20 +15,20 @@ public class MouseInputManager : IInputManager
     {
         foreach (var inputButtonState in InputButtonStateMap)
         {
-            var buttonState = inputButtonState.Value;
+            var buttonStatus = inputButtonState.Value;
             var mouse = Mouse.GetState();
             
-            buttonState.Previous = buttonState.Current;
-            switch (buttonState.Button)
+            buttonStatus.Previous = buttonStatus.Current;
+            switch (buttonStatus.Button)
             {
                 case MouseButtons.Left:
-                    buttonState.Current = mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                    buttonStatus.Current = mouse.LeftButton == ButtonState.Pressed;
                     break;
                 case MouseButtons.Right:
-                    buttonState.Current = mouse.RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                    buttonStatus.Current = mouse.RightButton == ButtonState.Pressed;
                     break;
                 case MouseButtons.Middle:
-                    buttonState.Current = mouse.MiddleButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed;
+                    buttonStatus.Current = mouse.MiddleButton == ButtonState.Pressed;
                     break;
                 default: 
                     break;
@@ -75,9 +75,10 @@ public class MouseInputManager : IInputManager
     public void MapInput(Inputs input, int button)
     {
         var buttonEnum = (MouseButtons) button;
-        if (!InputButtonStateMap.TryAdd(input, new MouseButtonCondition(buttonEnum)))
+        var previouslyMapped = InputButtonStateMap.TryAdd(input, new MouseButtonStatus(buttonEnum));
+        if (!previouslyMapped)
         {
-            InputButtonStateMap[input] = new MouseButtonCondition(buttonEnum);
+            InputButtonStateMap[input] = new MouseButtonStatus(buttonEnum);
         }
     }
 

@@ -1,6 +1,6 @@
 namespace Scripts.GameComponents;
 
-public class MouseButtonCondition(MouseButtons button)
+public class MouseButtonStatus(MouseButtons button)
 {
     public MouseButtons Button { get; } = button;
     public bool Previous { get; set; } = false;

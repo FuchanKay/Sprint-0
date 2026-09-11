@@ -16,7 +16,7 @@ public class Apple : IEntity
     public Apple(int x, int y, Random r)
     {
         Coord = new(x, y);
-        Scale = RandomizeScale(r);
+        Scale = RandomScale(r);
         TextureRect = new Rectangle(0, 0, TextureWidth, TextureWidth);
     }
 
@@ -40,7 +40,7 @@ public class Apple : IEntity
         );
     }
 
-    private float RandomizeScale(Random r)
+    private float RandomScale(Random r)
     {
         return (float) r.NextDouble() + MinimumScale;
     }
