@@ -12,4 +12,8 @@ CSE3902 assignment by Fuma Kondo
 - No AI was used to program this project
 
 # Resources
-- Monogame documentations
+- Monogame documentation
+- Microsoft Learn
+
+# Github repo
+https://github.com/FuchanKay/Sprint-0

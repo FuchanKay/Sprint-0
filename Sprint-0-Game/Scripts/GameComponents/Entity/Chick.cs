@@ -29,7 +29,7 @@ public class Chick : IEntity
         TextureRect = new Rectangle(0, 0, TextureWidth, TextureHeight);
         Direction = Directions.East;
     }
-
+    
     public void Update(IContext c, int dt)
     {
         var context = c as ChickContext;
