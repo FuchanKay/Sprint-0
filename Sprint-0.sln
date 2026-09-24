@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.340.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameLibrary", "MonoGameLibrary\MonoGameLibrary.csproj", "{136C3C93-6D14-C06D-3DBE-468E75475147}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprint-0-Game", "Sprint-0-Game\Sprint-0-Game.csproj", "{51856658-0903-4A16-F382-DE7F4CA8DC37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136C3C93-6D14-C06D-3DBE-468E75475147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51856658-0903-4A16-F382-DE7F4CA8DC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51856658-0903-4A16-F382-DE7F4CA8DC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51856658-0903-4A16-F382-DE7F4CA8DC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51856658-0903-4A16-F382-DE7F4CA8DC37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2DFEFC3D-C315-4764-8A26-550F340E97B4}
+	EndGlobalSection
+EndGlobal
